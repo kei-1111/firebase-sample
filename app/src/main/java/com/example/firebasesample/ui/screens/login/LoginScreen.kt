@@ -1,0 +1,20 @@
+package com.example.firebasesample.ui.screens.login
+
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import com.example.firebasesample.ui.component.CenteredContainer
+import com.example.firebasesample.ui.component.FirebaseSampleButton
+
+@Suppress("ModifierMissing")
+@Composable
+fun LoginScreen(
+    navigateToChat: () -> Unit,
+) {
+    CenteredContainer {
+        FirebaseSampleButton(
+            text = "To Chat",
+            onClick = navigateToChat,
+        )
+    }
+}

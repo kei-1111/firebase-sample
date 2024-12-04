@@ -5,12 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.firebasesample.ui.navigation.FirebaseSampleNavHost
+import com.example.firebasesample.ui.navigation.Screen
 import com.example.firebasesample.ui.theme.FirebaseSampleTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,9 +17,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FirebaseSampleTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
-                }
+                FirebaseSampleNavHost(
+                    navController = rememberNavController(),
+                    startDestination = Screen.Login,
+                    modifier = Modifier.fillMaxSize(),
+                )
             }
         }
     }
