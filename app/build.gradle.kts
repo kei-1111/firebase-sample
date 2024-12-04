@@ -2,6 +2,18 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+//    detekt
+    alias(libs.plugins.detekt)
+
+//    KSP
+    alias(libs.plugins.ksp)
+
+//    Hilt
+    alias(libs.plugins.hilt)
+
+//    Serialization
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -28,11 +40,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -56,4 +68,34 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+//    Immutable
+    implementation(libs.kotlinx.collections.immutable)
+
+//    Material Icon Extended
+    implementation(libs.androidx.material.icons.extended)
+
+//    detekt
+    detektPlugins(libs.detekt.compose)
+    detektPlugins(libs.detekt.formatting)
+
+//    Hilt
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+
+//    Serialization
+    implementation(libs.kotlinx.serialization.json)
+
+//    Navigation
+    implementation(libs.androidx.navigation.compose)
+}
+
+detekt {
+    config.setFrom("${rootProject.projectDir}/config/detekt/detekt.yml")
+    buildUponDefaultConfig = true
+
+    source = files("src/main/java")
+
+    autoCorrect = true
 }
