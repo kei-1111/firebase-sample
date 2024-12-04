@@ -23,20 +23,20 @@ fun FirebaseSampleNavHost(
     ) {
         composable<Screen.Login> {
             LoginScreen(
-                navigateToChat = { navController.navigateToChat() }
+                navigateToChat = { navController.navigateToChat() },
             )
         }
 
         composable<Screen.Chat> {
             ChatScreen(
-                navigateToUserSettings = { navController.navigateToUserSettings() }
+                navigateToUserSettings = { navController.navigateToUserSettings() },
             )
         }
 
         composable<Screen.UserSettings> {
             UserSettingsScreen(
                 navigateToChat = { navController.navigateToChat() },
-                navigateToLogin = { navController.navigateToLogin() }
+                navigateToLogin = { navController.navigateToLogin() },
             )
         }
     }

@@ -2,14 +2,13 @@ package com.example.firebasesample.ui.navigation
 
 import kotlinx.serialization.Serializable
 
-sealed class Screen() {
+sealed interface Screen {
     @Serializable
-    data object Login : Screen()
+    data object Login : Screen
 
     @Serializable
-    data object Chat : Screen()
+    data object Chat : Screen
 
     @Serializable
-    data object UserSettings : Screen()
+    data object UserSettings : Screen
 }
-
