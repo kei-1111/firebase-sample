@@ -1,4 +1,4 @@
-package com.example.firebasesample.ui.screens.chat
+package com.example.firebasesample.ui.feature.chat
 
 import androidx.lifecycle.viewModelScope
 import com.example.firebasesample.domain.model.TextMessage
@@ -15,14 +15,14 @@ import javax.inject.Inject
 @HiltViewModel
 class ChatViewModel @Inject constructor(
     private val firestoreRepository: FirestoreRepository,
-) : BaseViewModel<ChatUiState, ChatUiEvent, ChatUiEffect>() {
+) : BaseViewModel<ChatUiState, ChatUiEvent, ChatSideEffect>() {
     override fun createInitialState(): ChatUiState = ChatUiState()
 
     val messages: StateFlow<List<TextMessage>> = firestoreRepository.getMessages()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
-            initialValue = emptyList()
+            initialValue = emptyList(),
         )
 
     fun updateMessage(message: String) {
@@ -35,7 +35,7 @@ class ChatViewModel @Inject constructor(
             val textMessage = TextMessage(
                 id = UUID.randomUUID().toString(),
                 senderId = userId,
-                message = message
+                message = message,
             )
             firestoreRepository.sendTextMessage(textMessage)
             updateUiState { it.copy(message = "") }

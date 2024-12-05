@@ -5,10 +5,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.firebasesample.ui.screens.chat.ChatScreen
-import com.example.firebasesample.ui.screens.login.LoginScreen
-import com.example.firebasesample.ui.screens.register.RegisterScreen
-import com.example.firebasesample.ui.screens.user_settings.UserSettingsScreen
+import com.example.firebasesample.ui.feature.chat.ChatScreen
+import com.example.firebasesample.ui.feature.sign_in.SignInScreen
+import com.example.firebasesample.ui.feature.sign_up.SignUpScreen
+import com.example.firebasesample.ui.feature.user_settings.UserSettingsScreen
 
 @Composable
 fun FirebaseSampleNavHost(
@@ -22,13 +22,13 @@ fun FirebaseSampleNavHost(
         modifier = modifier,
     ) {
         composable<Screen.Register> {
-            RegisterScreen(
+            SignUpScreen(
                 navigateToChat = { navController.navigateToChat() },
             )
         }
 
         composable<Screen.Login> {
-            LoginScreen(
+            SignInScreen(
                 navigateToChat = { navController.navigateToChat() },
             )
         }

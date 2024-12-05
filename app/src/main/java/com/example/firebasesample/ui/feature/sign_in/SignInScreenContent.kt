@@ -1,4 +1,4 @@
-package com.example.firebasesample.ui.screens.login
+package com.example.firebasesample.ui.feature.sign_in
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,17 +14,17 @@ import com.example.firebasesample.ui.component.EmailTextField
 import com.example.firebasesample.ui.component.FirebaseSampleFilledButton
 import com.example.firebasesample.ui.component.FirebaseSampleOutlinedButton
 import com.example.firebasesample.ui.component.PasswordTextField
-import com.example.firebasesample.ui.screens.login.LoginScreenDimension.EmailTextFieldHeight
-import com.example.firebasesample.ui.screens.login.LoginScreenDimension.HorizontalDividerFraction
-import com.example.firebasesample.ui.screens.login.LoginScreenDimension.PasswordTextFieldHeight
-import com.example.firebasesample.ui.screens.login.LoginScreenDimension.SubmitButtonHeight
+import com.example.firebasesample.ui.feature.sign_in.SignInScreenDimension.EmailTextFieldHeight
+import com.example.firebasesample.ui.feature.sign_in.SignInScreenDimension.HorizontalDividerFraction
+import com.example.firebasesample.ui.feature.sign_in.SignInScreenDimension.PasswordTextFieldHeight
+import com.example.firebasesample.ui.feature.sign_in.SignInScreenDimension.SubmitButtonHeight
 import com.example.firebasesample.ui.theme.dimensions.Paddings
 import com.example.firebasesample.ui.theme.dimensions.Weights
 
 @Composable
-fun LoginScreenContent(
-    uiState: LoginUiState,
-    onEvent: (LoginUiEvent) -> Unit,
+fun SignInScreenContent(
+    uiState: SignInUiState,
+    onEvent: (SignInUiEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -32,10 +32,10 @@ fun LoginScreenContent(
             .padding(Paddings.Large),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        LoginHeader(
+        SignInHeader(
             modifier = Modifier.weight(Weights.Medium),
         )
-        LoginFields(
+        SignInFields(
             uiState = uiState,
             onEvent = onEvent,
             modifier = Modifier.weight(Weights.Heavy),
@@ -44,7 +44,7 @@ fun LoginScreenContent(
 }
 
 @Composable
-private fun LoginHeader(
+private fun SignInHeader(
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -60,9 +60,9 @@ private fun LoginHeader(
 }
 
 @Composable
-private fun LoginFields(
-    uiState: LoginUiState,
-    onEvent: (LoginUiEvent) -> Unit,
+private fun SignInFields(
+    uiState: SignInUiState,
+    onEvent: (SignInUiEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -76,21 +76,21 @@ private fun LoginFields(
         ) {
             EmailTextField(
                 email = uiState.email,
-                onEmailChange = { onEvent(LoginUiEvent.OnEmailInputChange(it)) },
+                onEmailChange = { onEvent(SignInUiEvent.OnEmailInputChange(it)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(EmailTextFieldHeight),
             )
             PasswordTextField(
                 password = uiState.password,
-                onPasswordChange = { onEvent(LoginUiEvent.OnPasswordInputChange(it)) },
+                onPasswordChange = { onEvent(SignInUiEvent.OnPasswordInputChange(it)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(PasswordTextFieldHeight),
             )
         }
-        LoginButton(
-            onClick = { onEvent(LoginUiEvent.OnLoginButtonClick) },
+        SignInButton(
+            onClick = { onEvent(SignInUiEvent.OnSignInButtonClick) },
             modifier = Modifier.fillMaxWidth(),
             enabled = uiState.email.isNotEmpty() && uiState.password.isNotEmpty(),
         )
@@ -100,14 +100,14 @@ private fun LoginFields(
                 .padding(vertical = Paddings.Large),
         )
         GoogleSignInButton(
-            onClick = { onEvent(LoginUiEvent.OnGoogleSignInClick) },
+            onClick = { onEvent(SignInUiEvent.OnGoogleSignInClick) },
             modifier = Modifier.fillMaxWidth(),
         )
     }
 }
 
 @Composable
-private fun LoginButton(
+private fun SignInButton(
     onClick: () -> Unit,
     enabled: Boolean,
     modifier: Modifier = Modifier,

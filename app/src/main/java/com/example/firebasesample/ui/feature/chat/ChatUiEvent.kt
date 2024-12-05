@@ -1,4 +1,4 @@
-package com.example.firebasesample.ui.screens.chat
+package com.example.firebasesample.ui.feature.chat
 
 import com.example.firebasesample.ui.base.UiEvent
 

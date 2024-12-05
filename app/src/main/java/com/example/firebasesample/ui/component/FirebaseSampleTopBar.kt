@@ -15,7 +15,9 @@ fun FirebaseSampleTopBar(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     navigationIcon: @Composable () -> Unit = {},
-    actions: @Composable() (RowScope.() -> Unit) = {},
+    actions:
+    @Composable()
+    (RowScope.() -> Unit) = {},
     containerColor: Color = MaterialTheme.colorScheme.surfaceContainer,
 ) {
     CenterAlignedTopAppBar(
@@ -23,8 +25,8 @@ fun FirebaseSampleTopBar(
         modifier = modifier,
         navigationIcon = navigationIcon,
         actions = actions,
-        colors = TopAppBarDefaults. centerAlignedTopAppBarColors(
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = containerColor,
-        )
+        ),
     )
 }

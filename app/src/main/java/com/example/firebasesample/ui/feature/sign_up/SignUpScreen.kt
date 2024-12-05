@@ -1,4 +1,4 @@
-package com.example.firebasesample.ui.screens.register
+package com.example.firebasesample.ui.feature.sign_up
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,9 +21,9 @@ import kotlinx.coroutines.flow.onEach
 
 @Suppress("ModifierMissing")
 @Composable
-fun RegisterScreen(
+fun SignUpScreen(
     navigateToChat: () -> Unit,
-    viewModel: RegisterViewModel = hiltViewModel(),
+    viewModel: SignUpViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -36,10 +36,10 @@ fun RegisterScreen(
     LaunchedEffect(lifecycleOwner, viewModel) {
         viewModel.uiEvent.flowWithLifecycle(lifecycleOwner.lifecycle).onEach { event ->
             when (event) {
-                is RegisterUiEvent.OnEmailInputChange -> viewModel.updateEmail(event.email)
-                is RegisterUiEvent.OnPasswordInputChange -> viewModel.updatePassword(event.password)
-                is RegisterUiEvent.OnRegisterButtonClick -> viewModel.submitRegister()
-                is RegisterUiEvent.OnGoogleSignInClick -> viewModel.startGoogleSignIn()
+                is SignUpUiEvent.OnEmailInputChange -> viewModel.updateEmail(event.email)
+                is SignUpUiEvent.OnPasswordInputChange -> viewModel.updatePassword(event.password)
+                is SignUpUiEvent.OnSignUpButtonClick -> viewModel.submitRegister()
+                is SignUpUiEvent.OnGoogleSignInClick -> viewModel.startGoogleSignIn()
             }
         }.launchIn(this)
     }
@@ -47,13 +47,13 @@ fun RegisterScreen(
     LaunchedEffect(lifecycleOwner, viewModel) {
         viewModel.uiEffect.flowWithLifecycle(lifecycleOwner.lifecycle).onEach { effect ->
             when (effect) {
-                is RegisterUiEffect.NavigateToChat -> latestNavigateToChat()
-                is RegisterUiEffect.ShowToast -> showToast(context, effect.message)
+                is SignUpSideEffect.NavigateToChat -> latestNavigateToChat()
+                is SignUpSideEffect.ShowToast -> showToast(context, effect.message)
             }
         }.launchIn(this)
     }
 
-    RegisterScreen(
+    SignUpScreen(
         uiState = uiState,
         onEvent = viewModel::onEvent,
         modifier = Modifier.fillMaxSize(),
@@ -61,15 +61,15 @@ fun RegisterScreen(
 }
 
 @Composable
-private fun RegisterScreen(
-    uiState: RegisterUiState,
-    onEvent: (RegisterUiEvent) -> Unit,
+private fun SignUpScreen(
+    uiState: SignUpUiState,
+    onEvent: (SignUpUiEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier,
     ) { innerPadding ->
-        RegisterScreenContent(
+        SignUpScreenContent(
             uiState = uiState,
             onEvent = onEvent,
             modifier = Modifier

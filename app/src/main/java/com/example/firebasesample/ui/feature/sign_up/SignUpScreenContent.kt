@@ -1,4 +1,4 @@
-package com.example.firebasesample.ui.screens.register
+package com.example.firebasesample.ui.feature.sign_up
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,17 +14,17 @@ import com.example.firebasesample.ui.component.EmailTextField
 import com.example.firebasesample.ui.component.FirebaseSampleFilledButton
 import com.example.firebasesample.ui.component.FirebaseSampleOutlinedButton
 import com.example.firebasesample.ui.component.PasswordTextField
-import com.example.firebasesample.ui.screens.register.RegisterScreenDimension.EmailTextFieldHeight
-import com.example.firebasesample.ui.screens.register.RegisterScreenDimension.HorizontalDividerFraction
-import com.example.firebasesample.ui.screens.register.RegisterScreenDimension.PasswordTextFieldHeight
-import com.example.firebasesample.ui.screens.register.RegisterScreenDimension.SubmitButtonHeight
+import com.example.firebasesample.ui.feature.sign_up.SignUpScreenDimension.EmailTextFieldHeight
+import com.example.firebasesample.ui.feature.sign_up.SignUpScreenDimension.HorizontalDividerFraction
+import com.example.firebasesample.ui.feature.sign_up.SignUpScreenDimension.PasswordTextFieldHeight
+import com.example.firebasesample.ui.feature.sign_up.SignUpScreenDimension.SubmitButtonHeight
 import com.example.firebasesample.ui.theme.dimensions.Paddings
 import com.example.firebasesample.ui.theme.dimensions.Weights
 
 @Composable
-fun RegisterScreenContent(
-    uiState: RegisterUiState,
-    onEvent: (RegisterUiEvent) -> Unit,
+fun SignUpScreenContent(
+    uiState: SignUpUiState,
+    onEvent: (SignUpUiEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -32,10 +32,10 @@ fun RegisterScreenContent(
             .padding(Paddings.Large),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        LoginHeader(
+        SignUpHeader(
             modifier = Modifier.weight(Weights.Medium),
         )
-        RegisterFields(
+        SignUpFields(
             uiState = uiState,
             onEvent = onEvent,
             modifier = Modifier.weight(Weights.Heavy),
@@ -44,7 +44,7 @@ fun RegisterScreenContent(
 }
 
 @Composable
-private fun LoginHeader(
+private fun SignUpHeader(
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -60,9 +60,9 @@ private fun LoginHeader(
 }
 
 @Composable
-private fun RegisterFields(
-    uiState: RegisterUiState,
-    onEvent: (RegisterUiEvent) -> Unit,
+private fun SignUpFields(
+    uiState: SignUpUiState,
+    onEvent: (SignUpUiEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -76,21 +76,21 @@ private fun RegisterFields(
         ) {
             EmailTextField(
                 email = uiState.email,
-                onEmailChange = { onEvent(RegisterUiEvent.OnEmailInputChange(it)) },
+                onEmailChange = { onEvent(SignUpUiEvent.OnEmailInputChange(it)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(EmailTextFieldHeight),
             )
             PasswordTextField(
                 password = uiState.password,
-                onPasswordChange = { onEvent(RegisterUiEvent.OnPasswordInputChange(it)) },
+                onPasswordChange = { onEvent(SignUpUiEvent.OnPasswordInputChange(it)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(PasswordTextFieldHeight),
             )
         }
-        RegisterButton(
-            onClick = { onEvent(RegisterUiEvent.OnRegisterButtonClick) },
+        SignUpButton(
+            onClick = { onEvent(SignUpUiEvent.OnSignUpButtonClick) },
             modifier = Modifier.fillMaxWidth(),
             enabled = uiState.email.isNotEmpty() && uiState.password.isNotEmpty(),
         )
@@ -99,15 +99,15 @@ private fun RegisterFields(
                 .fillMaxWidth(HorizontalDividerFraction)
                 .padding(vertical = Paddings.Large),
         )
-        GoogleSignInButton(
-            onClick = { onEvent(RegisterUiEvent.OnGoogleSignInClick) },
+        GoogleSignUpButton(
+            onClick = { onEvent(SignUpUiEvent.OnGoogleSignInClick) },
             modifier = Modifier.fillMaxWidth(),
         )
     }
 }
 
 @Composable
-private fun RegisterButton(
+private fun SignUpButton(
     onClick: () -> Unit,
     enabled: Boolean,
     modifier: Modifier = Modifier,
@@ -122,7 +122,7 @@ private fun RegisterButton(
 }
 
 @Composable
-private fun GoogleSignInButton(
+private fun GoogleSignUpButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {

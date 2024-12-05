@@ -1,4 +1,4 @@
-package com.example.firebasesample.ui.screens.register
+package com.example.firebasesample.ui.feature.sign_up
 
 import androidx.lifecycle.viewModelScope
 import com.example.firebasesample.domain.repository.AuthRepository
@@ -8,10 +8,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(
+class SignUpViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-) : BaseViewModel<RegisterUiState, RegisterUiEvent, RegisterUiEffect>() {
-    override fun createInitialState(): RegisterUiState = RegisterUiState()
+) : BaseViewModel<SignUpUiState, SignUpUiEvent, SignUpSideEffect>() {
+    override fun createInitialState(): SignUpUiState = SignUpUiState()
 
     fun updateEmail(email: String) {
         updateUiState { it.copy(email = email) }
@@ -29,10 +29,10 @@ class RegisterViewModel @Inject constructor(
             val result = authRepository.register(email, password)
             if (result.isSuccess) {
                 updateUiState { it.copy(isLoading = false) }
-                sendEffect(RegisterUiEffect.NavigateToChat)
+                sendEffect(SignUpSideEffect.NavigateToChat)
             } else {
                 updateUiState { it.copy(isLoading = false, error = result.exceptionOrNull()?.message ?: "") }
-                sendEffect(RegisterUiEffect.ShowToast("Register failed"))
+                sendEffect(SignUpSideEffect.ShowToast("Register failed"))
             }
         }
     }

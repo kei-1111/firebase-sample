@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @Suppress("VariableNaming")
-abstract class BaseViewModel<S : UiState, E : UiEvent, F : UiEffect> : ViewModel() {
+abstract class BaseViewModel<S : UiState, E : UiEvent, F : SideEffect> : ViewModel() {
     protected val _uiState = MutableStateFlow<S>(createInitialState())
     val uiState: StateFlow<S> = _uiState.asStateFlow()
 

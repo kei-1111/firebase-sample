@@ -1,10 +1,9 @@
-package com.example.firebasesample.ui.screens.chat
+package com.example.firebasesample.ui.feature.chat
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Person
-import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,6 +20,8 @@ import com.example.firebasesample.ui.component.FirebaseSampleIconButton
 import com.example.firebasesample.ui.component.FirebaseSampleTopBar
 import com.example.firebasesample.ui.component.TitleLargeText
 import com.example.firebasesample.ui.utils.showToast
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -52,14 +53,14 @@ fun ChatScreen(
     LaunchedEffect(lifecycleOwner, viewModel) {
         viewModel.uiEffect.flowWithLifecycle(lifecycleOwner.lifecycle).onEach { effect ->
             when (effect) {
-                is ChatUiEffect.ShowToast -> showToast(context, effect.message)
+                is ChatSideEffect.ShowToast -> showToast(context, effect.message)
             }
         }.launchIn(this)
     }
 
     ChatScreen(
         uiState = uiState,
-        messages = messages,
+        messages = messages.toPersistentList(),
         onEvent = viewModel::onEvent,
         modifier = Modifier.fillMaxSize(),
     )
@@ -68,7 +69,7 @@ fun ChatScreen(
 @Composable
 private fun ChatScreen(
     uiState: ChatUiState,
-    messages: List<TextMessage>,
+    messages: ImmutableList<TextMessage>,
     onEvent: (ChatUiEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -78,7 +79,7 @@ private fun ChatScreen(
             ChatScreenTopBar(
                 onUserSettingsButtonClick = { onEvent(ChatUiEvent.OnUserSettingsButtonClick) },
             )
-        }
+        },
     ) { innerPadding ->
         ChatScreenContent(
             uiState = uiState,
@@ -98,7 +99,7 @@ private fun ChatScreenTopBar(
     FirebaseSampleTopBar(
         title = {
             TitleLargeText(
-                text = "チャット"
+                text = "チャット",
             )
         },
         actions = {
@@ -106,6 +107,6 @@ private fun ChatScreenTopBar(
                 onClick = onUserSettingsButtonClick,
                 icon = Icons.Rounded.Person,
             )
-        }
+        },
     )
 }

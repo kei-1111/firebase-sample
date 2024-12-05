@@ -1,4 +1,4 @@
-package com.example.firebasesample.ui.screens.login
+package com.example.firebasesample.ui.feature.sign_in
 
 import androidx.lifecycle.viewModelScope
 import com.example.firebasesample.domain.repository.AuthRepository
@@ -8,11 +8,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
+class SignInViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-) : BaseViewModel<LoginUiState, LoginUiEvent, LoginUiEffect>() {
+) : BaseViewModel<SignInUiState, SignInUiEvent, SignInSideEffect>() {
 
-    override fun createInitialState(): LoginUiState = LoginUiState()
+    override fun createInitialState(): SignInUiState = SignInUiState()
 
     fun updateEmail(email: String) {
         updateUiState { it.copy(email = email) }
@@ -30,10 +30,10 @@ class LoginViewModel @Inject constructor(
             val result = authRepository.login(email, password)
             if (result.isSuccess) {
                 updateUiState { it.copy(isLoading = false) }
-                sendEffect(LoginUiEffect.NavigateToChat)
+                sendEffect(SignInSideEffect.NavigateToChat)
             } else {
                 updateUiState { it.copy(isLoading = false, error = result.exceptionOrNull()?.message ?: "") }
-                sendEffect(LoginUiEffect.ShowToast("Login failed"))
+                sendEffect(SignInSideEffect.ShowToast("Login failed"))
             }
         }
     }

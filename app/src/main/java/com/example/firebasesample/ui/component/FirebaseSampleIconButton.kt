@@ -22,10 +22,10 @@ fun FirebaseSampleIconButton(
     IconButton(
         onClick = onClick,
         modifier = modifier,
-        colors = IconButtonDefaults. iconButtonColors(
+        colors = IconButtonDefaults.iconButtonColors(
             contentColor = contentColor,
             containerColor = containerColor,
-        )
+        ),
     ) {
         Icon(
             imageVector = icon,

@@ -1,4 +1,4 @@
-package com.example.firebasesample.ui.screens.login
+package com.example.firebasesample.ui.feature.sign_in
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,9 +21,9 @@ import kotlinx.coroutines.flow.onEach
 
 @Suppress("ModifierMissing")
 @Composable
-fun LoginScreen(
+fun SignInScreen(
     navigateToChat: () -> Unit,
-    viewModel: LoginViewModel = hiltViewModel(),
+    viewModel: SignInViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -36,10 +36,10 @@ fun LoginScreen(
     LaunchedEffect(lifecycleOwner, viewModel) {
         viewModel.uiEvent.flowWithLifecycle(lifecycleOwner.lifecycle).onEach { event ->
             when (event) {
-                is LoginUiEvent.OnEmailInputChange -> viewModel.updateEmail(event.email)
-                is LoginUiEvent.OnPasswordInputChange -> viewModel.updatePassword(event.password)
-                is LoginUiEvent.OnLoginButtonClick -> viewModel.submitLogin()
-                is LoginUiEvent.OnGoogleSignInClick -> viewModel.startGoogleSignIn()
+                is SignInUiEvent.OnEmailInputChange -> viewModel.updateEmail(event.email)
+                is SignInUiEvent.OnPasswordInputChange -> viewModel.updatePassword(event.password)
+                is SignInUiEvent.OnSignInButtonClick -> viewModel.submitLogin()
+                is SignInUiEvent.OnGoogleSignInClick -> viewModel.startGoogleSignIn()
             }
         }.launchIn(this)
     }
@@ -47,29 +47,29 @@ fun LoginScreen(
     LaunchedEffect(lifecycleOwner, viewModel) {
         viewModel.uiEffect.flowWithLifecycle(lifecycleOwner.lifecycle).onEach { effect ->
             when (effect) {
-                is LoginUiEffect.NavigateToChat -> latestNavigateToChat()
-                is LoginUiEffect.ShowToast -> showToast(context, effect.message)
+                is SignInSideEffect.NavigateToChat -> latestNavigateToChat()
+                is SignInSideEffect.ShowToast -> showToast(context, effect.message)
             }
         }.launchIn(this)
     }
 
-    LoginScreen(
+    SignInScreen(
         uiState = uiState,
-        onEvent = { viewModel.onEvent(it) },
+        onEvent = viewModel::onEvent,
         modifier = Modifier.fillMaxSize(),
     )
 }
 
 @Composable
-private fun LoginScreen(
-    uiState: LoginUiState,
-    onEvent: (LoginUiEvent) -> Unit,
+private fun SignInScreen(
+    uiState: SignInUiState,
+    onEvent: (SignInUiEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier,
     ) { innerPadding ->
-        LoginScreenContent(
+        SignInScreenContent(
             uiState = uiState,
             onEvent = onEvent,
             modifier = Modifier

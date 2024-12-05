@@ -1,4 +1,4 @@
-package com.example.firebasesample.ui.screens.user_settings
+package com.example.firebasesample.ui.feature.user_settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable

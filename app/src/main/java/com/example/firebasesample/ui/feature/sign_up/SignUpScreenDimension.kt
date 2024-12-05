@@ -1,10 +1,8 @@
-@file:Suppress("MagicNumber")
-
-package com.example.firebasesample.ui.screens.login
+package com.example.firebasesample.ui.feature.sign_up
 
 import androidx.compose.ui.unit.dp
 
-data object LoginScreenDimension {
+data object SignUpScreenDimension {
     const val HorizontalDividerFraction = 0.5f
 
     val EmailTextFieldHeight = 56.dp

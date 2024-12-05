@@ -1,4 +1,4 @@
-package com.example.firebasesample.ui.screens.chat
+package com.example.firebasesample.ui.feature.chat
 
 import androidx.compose.ui.unit.dp
 
