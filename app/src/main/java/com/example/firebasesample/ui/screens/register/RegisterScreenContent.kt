@@ -5,21 +5,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Email
-import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import com.example.firebasesample.ui.component.DisplayMediumText
+import com.example.firebasesample.ui.component.EmailTextField
 import com.example.firebasesample.ui.component.FirebaseSampleFilledButton
-import com.example.firebasesample.ui.component.FirebaseSampleIcon
 import com.example.firebasesample.ui.component.FirebaseSampleOutlinedButton
-import com.example.firebasesample.ui.component.FirebaseSampleTextField
+import com.example.firebasesample.ui.component.PasswordTextField
 import com.example.firebasesample.ui.screens.register.RegisterScreenDimension.EmailTextFieldHeight
 import com.example.firebasesample.ui.screens.register.RegisterScreenDimension.HorizontalDividerFraction
 import com.example.firebasesample.ui.screens.register.RegisterScreenDimension.PasswordTextFieldHeight
@@ -83,12 +77,16 @@ private fun RegisterFields(
             EmailTextField(
                 email = uiState.email,
                 onEmailChange = { onEvent(RegisterUiEvent.OnEmailInputChange(it)) },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(EmailTextFieldHeight),
             )
             PasswordTextField(
                 password = uiState.password,
                 onPasswordChange = { onEvent(RegisterUiEvent.OnPasswordInputChange(it)) },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(PasswordTextFieldHeight),
             )
         }
         RegisterButton(
@@ -106,54 +104,6 @@ private fun RegisterFields(
             modifier = Modifier.fillMaxWidth(),
         )
     }
-}
-
-@Composable
-private fun EmailTextField(
-    email: String,
-    onEmailChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    FirebaseSampleTextField(
-        value = email,
-        onValueChange = onEmailChange,
-        modifier = modifier.height(EmailTextFieldHeight),
-        label = "exaple@example.com",
-        prefixIcon = {
-            FirebaseSampleIcon(
-                icon = Icons.Rounded.Email,
-            )
-        },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Email,
-            imeAction = ImeAction.Next,
-        ),
-        singleLine = true,
-    )
-}
-
-@Composable
-private fun PasswordTextField(
-    password: String,
-    onPasswordChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    FirebaseSampleTextField(
-        value = password,
-        onValueChange = onPasswordChange,
-        modifier = modifier.height(PasswordTextFieldHeight),
-        label = "",
-        prefixIcon = {
-            FirebaseSampleIcon(
-                icon = Icons.Rounded.Lock,
-            )
-        },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Password,
-            imeAction = ImeAction.Done,
-        ),
-        singleLine = true,
-    )
 }
 
 @Composable

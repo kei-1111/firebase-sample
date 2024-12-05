@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Email
+import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -16,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import com.example.firebasesample.ui.theme.dimensions.Alpha
 import com.example.firebasesample.ui.theme.dimensions.Paddings
 import com.example.firebasesample.ui.theme.dimensions.Weights
@@ -72,4 +77,52 @@ fun FirebaseSampleTextField(
             suffixIcon?.invoke()
         }
     }
+}
+
+@Composable
+fun EmailTextField(
+    email: String,
+    onEmailChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    FirebaseSampleTextField(
+        value = email,
+        onValueChange = onEmailChange,
+        modifier = modifier,
+        label = "exaple@example.com",
+        prefixIcon = {
+            FirebaseSampleIcon(
+                icon = Icons.Rounded.Email,
+            )
+        },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Email,
+            imeAction = ImeAction.Next,
+        ),
+        singleLine = true,
+    )
+}
+
+@Composable
+fun PasswordTextField(
+    password: String,
+    onPasswordChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    FirebaseSampleTextField(
+        value = password,
+        onValueChange = onPasswordChange,
+        modifier = modifier,
+        label = "",
+        prefixIcon = {
+            FirebaseSampleIcon(
+                icon = Icons.Rounded.Lock,
+            )
+        },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Password,
+            imeAction = ImeAction.Done,
+        ),
+        singleLine = true,
+    )
 }
