@@ -1,5 +1,6 @@
 package com.example.firebasesample.data.repository
 
+import com.example.firebasesample.di.IoDispatcher
 import com.example.firebasesample.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -10,7 +11,7 @@ import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
-    private val ioDispatcher: CoroutineDispatcher,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : AuthRepository {
     override suspend fun register(email: String, password: String): Result<FirebaseUser> =
         withContext(ioDispatcher) {
