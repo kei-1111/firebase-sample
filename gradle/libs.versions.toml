@@ -44,6 +44,9 @@ googleServices = "4.4.2"
 # Firebase
 firebaseBom = "33.6.0"
 
+# Coroutines
+kotlinxCoroutinesPlayServices = "1.7.3"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -91,6 +94,10 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 # Firebase
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx" }
+
+# Coroutines
+kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }
 
 
 [plugins]

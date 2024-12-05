@@ -1,15 +1,18 @@
 package com.example.firebasesample.ui.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material3.MaterialTheme
@@ -46,8 +49,11 @@ fun FirebaseSampleTextField(
     ) {
         Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = Paddings.Medium),
+                .padding(
+                    horizontal = Paddings.Medium,
+                    vertical = Paddings.ExtraSmall,
+                )
+                .wrapContentSize(Alignment.Center),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Paddings.Medium),
         ) {
@@ -124,5 +130,27 @@ fun PasswordTextField(
             imeAction = ImeAction.Done,
         ),
         singleLine = true,
+    )
+}
+
+@Composable
+fun MessageTextField(
+    message: String,
+    onMessageChange: (String) -> Unit,
+    onSendClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    FirebaseSampleTextField(
+        value = message,
+        onValueChange = onMessageChange,
+        modifier = modifier,
+        shape = MaterialTheme.shapes.large,
+        label = "",
+        suffixIcon = {
+            FirebaseSampleIcon(
+                icon = Icons.AutoMirrored.Rounded.Send,
+                modifier = Modifier.clickable{ onSendClick() }
+            )
+        },
     )
 }
