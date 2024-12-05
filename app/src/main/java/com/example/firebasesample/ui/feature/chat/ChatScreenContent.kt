@@ -36,6 +36,7 @@ import com.example.firebasesample.ui.component.MessageTextField
 import com.example.firebasesample.ui.feature.chat.ChatScreenDimension.MessageTextFieldMaxHeight
 import com.example.firebasesample.ui.theme.dimensions.Alpha
 import com.example.firebasesample.ui.theme.dimensions.Paddings
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun ChatScreenContent(
