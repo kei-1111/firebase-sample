@@ -14,6 +14,9 @@ plugins {
 
 //    Serialization
     alias(libs.plugins.serialization)
+
+//    Google Services
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -75,6 +78,12 @@ dependencies {
 //    Material Icon Extended
     implementation(libs.androidx.material.icons.extended)
 
+//    Lottie
+    implementation(libs.lottie.compose)
+
+//    Splash Screen
+    implementation(libs.androidx.core.splashscreen)
+
 //    detekt
     detektPlugins(libs.detekt.compose)
     detektPlugins(libs.detekt.formatting)
@@ -89,6 +98,10 @@ dependencies {
 
 //    Navigation
     implementation(libs.androidx.navigation.compose)
+
+//    Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 }
 
 detekt {

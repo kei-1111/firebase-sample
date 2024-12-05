@@ -15,6 +15,12 @@ kotlinxCollectionsImmutable = "0.3.8"
 # Material Icons Extended
 materialIconsExtended = "1.7.5"
 
+# Lottie
+lottieCompose = "6.6.1"
+
+# Splash Screen
+coreSplashscreen = "1.0.1"
+
 # detekt
 detekt = "1.23.7"
 detektCompose = "0.4.12"
@@ -31,6 +37,12 @@ serializationJson = "1.7.3"
 
 # Navigation
 navigationCompose = "2.8.4"
+
+# Google Services
+googleServices = "4.4.2"
+
+# Firebase
+firebaseBom = "33.6.0"
 
 
 [libraries]
@@ -55,6 +67,12 @@ kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotli
 # Material Icons Extended
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIconsExtended" }
 
+# Lottie
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
+
+# Splash Screen
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
+
 # detekt
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 detekt-compose = { group = "io.nlopez.compose.rules", name = "detekt", version.ref = "detektCompose" }
@@ -69,6 +87,10 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 
 # Navigation
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+
+# Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 
 
 [plugins]
@@ -87,3 +109,6 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 # Serialization
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+# Google Services
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }

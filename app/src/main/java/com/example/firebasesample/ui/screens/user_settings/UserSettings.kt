@@ -3,7 +3,7 @@ package com.example.firebasesample.ui.screens.user_settings
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import com.example.firebasesample.ui.component.CenteredContainer
-import com.example.firebasesample.ui.component.FirebaseSampleButton
+import com.example.firebasesample.ui.component.FirebaseSampleFilledButton
 
 @Suppress("ModifierMissing")
 @Composable
@@ -13,11 +13,11 @@ fun UserSettingsScreen(
 ) {
     CenteredContainer {
         Column {
-            FirebaseSampleButton(
+            FirebaseSampleFilledButton(
                 text = "To Chat",
                 onClick = navigateToChat,
             )
-            FirebaseSampleButton(
+            FirebaseSampleFilledButton(
                 text = "To Login",
                 onClick = navigateToLogin,
             )

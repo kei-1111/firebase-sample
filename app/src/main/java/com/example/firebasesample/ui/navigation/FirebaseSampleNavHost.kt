@@ -2,12 +2,12 @@ package com.example.firebasesample.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.firebasesample.ui.screens.chat.ChatScreen
 import com.example.firebasesample.ui.screens.login.LoginScreen
+import com.example.firebasesample.ui.screens.register.RegisterScreen
 import com.example.firebasesample.ui.screens.user_settings.UserSettingsScreen
 
 @Composable
@@ -21,6 +21,12 @@ fun FirebaseSampleNavHost(
         startDestination = startDestination,
         modifier = modifier,
     ) {
+        composable<Screen.Register> {
+            RegisterScreen(
+                navigateToChat = { navController.navigateToChat() },
+            )
+        }
+
         composable<Screen.Login> {
             LoginScreen(
                 navigateToChat = { navController.navigateToChat() },
