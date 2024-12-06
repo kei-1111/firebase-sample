@@ -23,9 +23,9 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             val isUserLoggedIn = authRepository.isUserLoggedIn()
             _startDestination.value = if (isUserLoggedIn) {
-                Screen.Chat
+                Screen.AuthSelection
             } else {
-                Screen.Register
+                Screen.AuthSelection
             }
         }
     }

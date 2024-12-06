@@ -9,7 +9,7 @@ import com.example.firebasesample.ui.component.FirebaseSampleFilledButton
 @Composable
 fun UserSettingsScreen(
     navigateToChat: () -> Unit,
-    navigateToLogin: () -> Unit,
+    navigateToAuthSelection: () -> Unit,
 ) {
     CenteredContainer {
         Column {
@@ -19,7 +19,7 @@ fun UserSettingsScreen(
             )
             FirebaseSampleFilledButton(
                 text = "To Login",
-                onClick = navigateToLogin,
+                onClick = navigateToAuthSelection,
             )
         }
     }

@@ -49,12 +49,10 @@ fun SignInScreenContent(
 private fun SignInHeader(
     modifier: Modifier = Modifier,
 ) {
-    Column(
+    CenteredContainer(
         modifier = modifier,
+
     ) {
-        DisplayMediumText(
-            text = "Firebase Sample",
-        )
         DisplayMediumText(
             text = "ログイン",
         )

@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.firebasesample.ui.feature.auth_selection.AuthSelectionScreen
 import com.example.firebasesample.ui.feature.chat.ChatScreen
 import com.example.firebasesample.ui.feature.sign_in.SignInScreen
 import com.example.firebasesample.ui.feature.sign_up.SignUpScreen
@@ -21,13 +22,20 @@ fun FirebaseSampleNavHost(
         startDestination = startDestination,
         modifier = modifier,
     ) {
-        composable<Screen.Register> {
+        composable<Screen.AuthSelection> {
+             AuthSelectionScreen(
+                 navigateToSignUp = { navController.navigateToSignUp() },
+                 navigateToSignIn = { navController.navigateToSignIn() },
+             )
+        }
+
+        composable<Screen.SignUp> {
             SignUpScreen(
                 navigateToChat = { navController.navigateToChat() },
             )
         }
 
-        composable<Screen.Login> {
+        composable<Screen.SingIn> {
             SignInScreen(
                 navigateToChat = { navController.navigateToChat() },
             )
@@ -42,14 +50,22 @@ fun FirebaseSampleNavHost(
         composable<Screen.UserSettings> {
             UserSettingsScreen(
                 navigateToChat = { navController.navigateToChat() },
-                navigateToLogin = { navController.navigateToLogin() },
+                navigateToAuthSelection = { navController.navigateToAuthSelection() },
             )
         }
     }
 }
 
-fun NavHostController.navigateToLogin() {
-    this.navigate(Screen.Login)
+fun NavHostController.navigateToAuthSelection() {
+    this.navigate(Screen.AuthSelection)
+}
+
+fun NavHostController.navigateToSignUp() {
+    this.navigate(Screen.SignUp)
+}
+
+fun NavHostController.navigateToSignIn() {
+    this.navigate(Screen.SingIn)
 }
 
 fun NavHostController.navigateToChat() {

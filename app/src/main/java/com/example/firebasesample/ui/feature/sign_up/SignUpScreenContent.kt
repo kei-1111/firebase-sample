@@ -9,6 +9,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.firebasesample.ui.component.CenteredContainer
 import com.example.firebasesample.ui.component.DisplayMediumText
 import com.example.firebasesample.ui.component.EmailTextField
 import com.example.firebasesample.ui.component.FirebaseSampleFilledButton
@@ -47,12 +48,10 @@ fun SignUpScreenContent(
 private fun SignUpHeader(
     modifier: Modifier = Modifier,
 ) {
-    Column(
+    CenteredContainer(
         modifier = modifier,
-    ) {
-        DisplayMediumText(
-            text = "Firebase Sample",
-        )
+
+        ) {
         DisplayMediumText(
             text = "新規登録",
         )
