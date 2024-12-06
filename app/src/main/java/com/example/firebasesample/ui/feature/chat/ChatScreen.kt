@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -11,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -38,6 +40,7 @@ fun ChatScreen(
 
     val context = LocalContext.current
 
+    val focusManager = LocalFocusManager.current
     val latestNavigateToUserSettings by rememberUpdatedState(navigateToUserSettings)
 
     LaunchedEffect(lifecycleOwner, viewModel) {
@@ -45,7 +48,10 @@ fun ChatScreen(
             when (event) {
                 is ChatUiEvent.OnMessageInputChange -> viewModel.updateMessage(event.message)
                 is ChatUiEvent.OnMessageSendClick -> viewModel.sendTextMessage(userId = "ゆーざあいでぃー")
-                is ChatUiEvent.OnUserSettingsButtonClick -> latestNavigateToUserSettings()
+                is ChatUiEvent.OnUserSettingsButtonClick -> {
+                    focusManager.clearFocus()
+                    latestNavigateToUserSettings()
+                }
             }
         }.launchIn(this)
     }

@@ -33,7 +33,8 @@ fun FirebaseSampleTextField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     shape: Shape = MaterialTheme.shapes.small,
-    backgroundColor: Color = MaterialTheme.colorScheme.surfaceContainer,
+    textColor: Color = MaterialTheme.colorScheme.onSurface,
+    containerColor: Color = MaterialTheme.colorScheme.surfaceContainer,
     label: String = "",
     prefixIcon: @Composable (() -> Unit)? = null,
     suffixIcon: @Composable (() -> Unit)? = null,
@@ -43,14 +44,14 @@ fun FirebaseSampleTextField(
 ) {
     Surface(
         modifier = modifier,
-        color = backgroundColor,
+        color = containerColor,
         shape = shape,
     ) {
         Row(
             modifier = Modifier
                 .padding(
                     horizontal = Paddings.Medium,
-                    vertical = Paddings.ExtraSmall,
+                    vertical = Paddings.Small,
                 )
                 .wrapContentSize(Alignment.Center),
             verticalAlignment = Alignment.CenterVertically,
@@ -66,7 +67,7 @@ fun FirebaseSampleTextField(
                     onValueChange = onValueChange,
                     modifier = Modifier.fillMaxWidth(),
                     textStyle = MaterialTheme.typography.bodyMedium
-                        .copy(color = MaterialTheme.colorScheme.onSurface.copy(alpha = Alpha.High)),
+                        .copy(color = textColor.copy(alpha = Alpha.High)),
                     keyboardOptions = keyboardOptions,
                     keyboardActions = keyboardActions,
                     singleLine = singleLine,
@@ -143,12 +144,21 @@ fun MessageTextField(
         value = message,
         onValueChange = onMessageChange,
         modifier = modifier,
-        shape = MaterialTheme.shapes.large,
+        shape = MaterialTheme.shapes.extraLarge,
+        textColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
         label = "",
         suffixIcon = {
             FirebaseSampleIcon(
                 icon = Icons.AutoMirrored.Rounded.Send,
-                modifier = Modifier.clickable { onSendClick() },
+                modifier = Modifier
+                    .clickable(enabled = message.isNotEmpty()) { onSendClick() },
+                tint = if (message.isNotEmpty()) {
+                    MaterialTheme.colorScheme.onPrimaryContainer
+                } else {
+                    MaterialTheme.colorScheme.onPrimaryContainer
+                        .copy(alpha = Alpha.Medium)
+                },
             )
         },
     )

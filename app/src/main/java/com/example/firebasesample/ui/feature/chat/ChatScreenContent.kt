@@ -36,6 +36,7 @@ import com.example.firebasesample.ui.component.MessageTextField
 import com.example.firebasesample.ui.feature.chat.ChatScreenDimension.MessageTextFieldMaxHeight
 import com.example.firebasesample.ui.theme.dimensions.Alpha
 import com.example.firebasesample.ui.theme.dimensions.Paddings
+import com.example.firebasesample.ui.theme.dimensions.Weights
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
@@ -52,8 +53,7 @@ fun ChatScreenContent(
             messages = messages,
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
-                .padding(Paddings.ExtraSmall),
+                .weight(Weights.Medium),
         )
         MessageInput(
             message = uiState.message,
@@ -137,17 +137,17 @@ private fun MessageInput(
 
     val boxModifier = if (isKeyboardVisible()) {
         Modifier
-            .padding(horizontal = Paddings.Medium, vertical = Paddings.Small)
+            .padding(horizontal = Paddings.Medium, vertical = Paddings.Medium)
     } else {
         Modifier
-            .padding(horizontal = Paddings.Medium, vertical = Paddings.Small)
+            .padding(horizontal = Paddings.Medium, vertical = Paddings.Medium)
             .padding(bottom = bottomPaddingValues)
     }
 
     Surface(
         modifier = modifier
             .fillMaxWidth(),
-        color = MaterialTheme.colorScheme.primaryContainer,
+        color = MaterialTheme.colorScheme.surfaceContainer,
     ) {
         Box(
             modifier = boxModifier,
