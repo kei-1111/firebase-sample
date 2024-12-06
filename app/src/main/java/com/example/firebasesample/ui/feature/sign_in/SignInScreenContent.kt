@@ -6,9 +6,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.firebasesample.ui.component.CenteredContainer
 import com.example.firebasesample.ui.component.DisplayMediumText
 import com.example.firebasesample.ui.component.EmailTextField
 import com.example.firebasesample.ui.component.FirebaseSampleFilledButton
@@ -131,5 +133,6 @@ private fun GoogleSignInButton(
         onClick = onClick,
         modifier = modifier
             .height(SubmitButtonHeight),
+        shape = MaterialTheme.shapes.small,
     )
 }
