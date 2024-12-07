@@ -27,7 +27,7 @@ class SignInViewModel @Inject constructor(
             updateUiState { it.copy(isLoading = true) }
             val email = uiState.value.email
             val password = uiState.value.password
-            val result = authRepository.login(email, password)
+            val result = authRepository.signIn(email, password)
             if (result.isSuccess) {
                 updateUiState { it.copy(isLoading = false) }
                 sendEffect(SignInSideEffect.NavigateToChat)

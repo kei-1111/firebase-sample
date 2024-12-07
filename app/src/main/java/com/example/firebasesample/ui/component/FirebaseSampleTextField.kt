@@ -14,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.Lock
+import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -161,5 +162,29 @@ fun MessageTextField(
                 },
             )
         },
+    )
+}
+
+@Composable
+fun NameTextField(
+    name: String,
+    onNameChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    FirebaseSampleTextField(
+        value = name,
+        onValueChange = onNameChange,
+        modifier = modifier,
+        label = "名前",
+        prefixIcon = {
+            FirebaseSampleIcon(
+                icon = Icons.Rounded.Person,
+            )
+        },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Next,
+        ),
+        singleLine = true,
     )
 }

@@ -2,7 +2,8 @@ package com.example.firebasesample.data.repository
 
 import com.example.firebasesample.di.IoDispatcher
 import com.example.firebasesample.domain.model.TextMessage
-import com.example.firebasesample.domain.repository.FirestoreRepository
+import com.example.firebasesample.domain.model.User
+import com.example.firebasesample.domain.repository.ChatRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.awaitClose
@@ -12,10 +13,10 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class FirestoreRepositoryImpl @Inject constructor(
+class ChatRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
-) : FirestoreRepository {
+) : ChatRepository {
     private val chatCollection = firestore.collection("chats")
 
     override suspend fun sendTextMessage(message: TextMessage) {

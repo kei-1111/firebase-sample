@@ -110,7 +110,7 @@ private fun MessageItem(
                 ),
             )
             BodyMediumText(
-                text = message.senderId,
+                text = message.user.name,
                 modifier = Modifier.padding(horizontal = Paddings.Small),
             )
             LabelMediumText(

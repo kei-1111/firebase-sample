@@ -13,7 +13,7 @@ class AuthRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : AuthRepository {
-    override suspend fun register(email: String, password: String): Result<FirebaseUser> =
+    override suspend fun signUp(email: String, password: String): Result<FirebaseUser> =
         withContext(ioDispatcher) {
             try {
                 val result = auth.createUserWithEmailAndPassword(email, password).await()
@@ -23,7 +23,7 @@ class AuthRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun login(email: String, password: String): Result<FirebaseUser> =
+    override suspend fun signIn(email: String, password: String): Result<FirebaseUser> =
         withContext(ioDispatcher) {
             try {
                 val result = auth.signInWithEmailAndPassword(email, password).await()
@@ -33,13 +33,17 @@ class AuthRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun logout(): Result<Unit> {
-        return Result.success(Unit)
-    }
-
-    override suspend fun isUserLoggedIn(): Boolean {
-        return withContext(ioDispatcher) {
-            auth.currentUser != null
+    override suspend fun signOut(): Result<Unit> =
+        withContext(ioDispatcher) {
+            try {
+                auth.signOut()
+                Result.success(Unit)
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
         }
+
+    override suspend fun getCurrentUser(): FirebaseUser? {
+        return auth.currentUser
     }
 }

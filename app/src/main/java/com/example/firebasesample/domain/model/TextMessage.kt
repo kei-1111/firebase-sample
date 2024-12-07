@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter
 
 data class TextMessage(
     val id: String = "",
-    val senderId: String = "",
+    val user: User = User(),
     val message: String = "",
     val timestamp: Long = System.currentTimeMillis(),
 )

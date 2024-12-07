@@ -1,5 +1,6 @@
 package com.example.firebasesample.ui.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -9,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun FirebaseSampleFilledButton(
@@ -35,6 +37,8 @@ fun FirebaseSampleFilledButton(
     }
 }
 
+private val BorderStrokeWidth = 2.dp
+
 @Composable
 fun FirebaseSampleOutlinedButton(
     text: String,
@@ -42,16 +46,21 @@ fun FirebaseSampleOutlinedButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     shape: Shape = CircleShape,
+    contentColor: Color = MaterialTheme.colorScheme.onSurface,
 ) {
     OutlinedButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
         shape = shape,
+        colors = ButtonDefaults.outlinedButtonColors(
+            contentColor = contentColor,
+        ),
+        border = BorderStroke(BorderStrokeWidth, contentColor),
     ) {
         BodyMediumText(
             text = text,
-            color = MaterialTheme.colorScheme.onSurface,
+            color = contentColor,
         )
     }
 }

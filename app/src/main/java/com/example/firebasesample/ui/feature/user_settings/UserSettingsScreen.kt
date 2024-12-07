@@ -1,10 +1,10 @@
-package com.example.firebasesample.ui.feature.chat
+package com.example.firebasesample.ui.feature.user_settings
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBackIosNew
 import androidx.compose.material.icons.rounded.Person
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -12,47 +12,41 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
-import com.example.firebasesample.domain.model.TextMessage
-import com.example.firebasesample.domain.model.User
 import com.example.firebasesample.ui.component.FirebaseSampleIconButton
 import com.example.firebasesample.ui.component.FirebaseSampleTopBar
 import com.example.firebasesample.ui.component.TitleLargeText
 import com.example.firebasesample.ui.utils.showToast
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @Suppress("ModifierMissing")
 @Composable
-fun ChatScreen(
-    navigateToUserSettings: () -> Unit,
-    viewModel: ChatViewModel = hiltViewModel(),
+fun UserSettingsScreen(
+    navigateToChat: () -> Unit,
+    navigateToAuthSelection: () -> Unit,
+    viewModel: UserSettingsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val messages by viewModel.messages.collectAsStateWithLifecycle()
 
     val lifecycleOwner = LocalLifecycleOwner.current
 
     val context = LocalContext.current
 
-    val focusManager = LocalFocusManager.current
-    val latestNavigateToUserSettings by rememberUpdatedState(navigateToUserSettings)
+    val latestNavigateToChat by rememberUpdatedState(navigateToChat)
 
     LaunchedEffect(lifecycleOwner, viewModel) {
         viewModel.uiEvent.flowWithLifecycle(lifecycleOwner.lifecycle).onEach { event ->
             when (event) {
-                is ChatUiEvent.OnMessageInputChange -> viewModel.updateMessage(event.message)
-                is ChatUiEvent.OnMessageSendClick -> viewModel.sendTextMessage()
-                is ChatUiEvent.OnUserSettingsButtonClick -> {
-                    focusManager.clearFocus()
-                    latestNavigateToUserSettings()
+                is UserSettingsUiEvent.OnNavigateToChat -> {
+                    viewModel.saveUser()
+                    latestNavigateToChat()
                 }
+                is UserSettingsUiEvent.OnNameChange -> viewModel.updateName(event.name)
+                is UserSettingsUiEvent.OnSignOutButtonClick -> viewModel.signOut()
             }
         }.launchIn(this)
     }
@@ -60,59 +54,57 @@ fun ChatScreen(
     LaunchedEffect(lifecycleOwner, viewModel) {
         viewModel.uiEffect.flowWithLifecycle(lifecycleOwner.lifecycle).onEach { effect ->
             when (effect) {
-                is ChatSideEffect.ShowToast -> showToast(context, effect.message)
+                is UserSettingsSideEffect.NavigateToAuthSelection -> navigateToAuthSelection()
+                is UserSettingsSideEffect.ShowToast -> showToast(context, effect.message)
             }
         }.launchIn(this)
     }
 
-    ChatScreen(
+    UserSettingsScreen(
         uiState = uiState,
-        messages = messages.toPersistentList(),
         onEvent = viewModel::onEvent,
         modifier = Modifier.fillMaxSize(),
     )
 }
 
 @Composable
-private fun ChatScreen(
-    uiState: ChatUiState,
-    messages: ImmutableList<TextMessage>,
-    onEvent: (ChatUiEvent) -> Unit,
+private fun UserSettingsScreen(
+    uiState: UserSettingsUiState,
+    onEvent: (UserSettingsUiEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier,
         topBar = {
-            ChatScreenTopBar(
-                onUserSettingsButtonClick = { onEvent(ChatUiEvent.OnUserSettingsButtonClick) },
+            UserSettingsScreenTopBar(
+                onNavigateToChat = { onEvent(UserSettingsUiEvent.OnNavigateToChat) },
             )
-        },
+        }
     ) { innerPadding ->
-        ChatScreenContent(
+        UserSettingsScreenContent(
             uiState = uiState,
-            messages = messages,
             onEvent = onEvent,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = innerPadding.calculateTopPadding()),
+                .padding(innerPadding),
         )
     }
 }
 
 @Composable
-private fun ChatScreenTopBar(
-    onUserSettingsButtonClick: () -> Unit,
+private fun UserSettingsScreenTopBar(
+    onNavigateToChat: () -> Unit,
 ) {
     FirebaseSampleTopBar(
         title = {
             TitleLargeText(
-                text = "チャット",
+                text = "ユーザ設定",
             )
         },
-        actions = {
+        navigationIcon = {
             FirebaseSampleIconButton(
-                onClick = onUserSettingsButtonClick,
-                icon = Icons.Rounded.Person,
+                onClick = onNavigateToChat,
+                icon = Icons.Rounded.ArrowBackIosNew,
             )
         },
     )

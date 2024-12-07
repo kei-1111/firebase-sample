@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,11 +22,13 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val isUserLoggedIn = authRepository.isUserLoggedIn()
-            _startDestination.value = if (isUserLoggedIn) {
-                Screen.Chat
-            } else {
-                Screen.AuthSelection
+            val isUserLoggedIn = authRepository.getCurrentUser() != null
+            _startDestination.update {
+                if (isUserLoggedIn) {
+                    Screen.Chat
+                } else {
+                    Screen.AuthSelection
+                }
             }
         }
     }
