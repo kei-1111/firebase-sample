@@ -3,14 +3,10 @@ package com.example.firebasesample.data.repository
 import com.example.firebasesample.di.IoDispatcher
 import com.example.firebasesample.domain.model.User
 import com.example.firebasesample.domain.repository.UserRepository
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
@@ -19,7 +15,6 @@ import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore,
-    private val auth: FirebaseAuth,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : UserRepository {
     private val userCollection = firestore.collection("users")
@@ -58,8 +53,8 @@ class UserRepositoryImpl @Inject constructor(
             userCollection.document(user.uid).update(
                 mapOf(
                     "email" to user.email,
-                    "name" to user.name
-                )
+                    "name" to user.name,
+                ),
             ).await()
         }
     }

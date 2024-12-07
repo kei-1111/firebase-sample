@@ -2,7 +2,6 @@ package com.example.firebasesample.data.repository
 
 import com.example.firebasesample.di.IoDispatcher
 import com.example.firebasesample.domain.model.TextMessage
-import com.example.firebasesample.domain.model.User
 import com.example.firebasesample.domain.repository.ChatRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineDispatcher

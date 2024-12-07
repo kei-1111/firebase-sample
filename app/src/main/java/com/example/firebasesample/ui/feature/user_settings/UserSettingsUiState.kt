@@ -5,5 +5,5 @@ import com.example.firebasesample.ui.base.UiState
 
 data class UserSettingsUiState(
     val name: String = "",
-    val user: User = User()
+    val user: User = User(),
 ) : UiState

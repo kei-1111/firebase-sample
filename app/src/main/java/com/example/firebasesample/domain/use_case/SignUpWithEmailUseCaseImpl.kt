@@ -11,7 +11,7 @@ import javax.inject.Inject
 class SignUpWithEmailUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository,
     private val userRepository: UserRepository,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : SignUpWithEmailUseCase {
     override suspend operator fun invoke(email: String, password: String): Result<Unit> {
         return withContext(ioDispatcher) {
@@ -23,7 +23,7 @@ class SignUpWithEmailUseCaseImpl @Inject constructor(
                         val user = User(
                             uid = firebaseUser.uid,
                             email = firebaseUser.email ?: "",
-                            name = "名無し"
+                            name = "名無し",
                         )
                         val userResult = userRepository.createUser(user)
                         if (userResult.isSuccess) {

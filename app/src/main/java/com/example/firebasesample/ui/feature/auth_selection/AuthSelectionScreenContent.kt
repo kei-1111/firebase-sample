@@ -15,7 +15,6 @@ import com.example.firebasesample.ui.component.DisplayMediumText
 import com.example.firebasesample.ui.component.FirebaseSampleFilledButton
 import com.example.firebasesample.ui.component.FirebaseSampleLottie
 import com.example.firebasesample.ui.component.FirebaseSampleOutlinedButton
-import com.example.firebasesample.ui.component.TitleLargeText
 import com.example.firebasesample.ui.feature.auth_selection.AuthSelectionScreenDimension.HeaderIconSize
 import com.example.firebasesample.ui.feature.auth_selection.AuthSelectionScreenDimension.SignInButtonHeight
 import com.example.firebasesample.ui.feature.auth_selection.AuthSelectionScreenDimension.SignUpButtonHeight
@@ -42,7 +41,6 @@ fun AuthSelectionScreenContent(
         )
     }
 }
-
 
 @Composable
 private fun AuthSelectionHeader(

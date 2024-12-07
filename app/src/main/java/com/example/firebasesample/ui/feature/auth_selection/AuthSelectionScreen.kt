@@ -14,6 +14,7 @@ import androidx.lifecycle.flowWithLifecycle
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
+@Suppress("ModifierMissing")
 @Composable
 fun AuthSelectionScreen(
     navigateToSignUp: () -> Unit,

@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Person
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,7 +17,6 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import com.example.firebasesample.domain.model.TextMessage
-import com.example.firebasesample.domain.model.User
 import com.example.firebasesample.ui.component.FirebaseSampleIconButton
 import com.example.firebasesample.ui.component.FirebaseSampleTopBar
 import com.example.firebasesample.ui.component.TitleLargeText

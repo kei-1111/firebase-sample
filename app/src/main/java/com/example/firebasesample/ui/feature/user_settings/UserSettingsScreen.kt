@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBackIosNew
-import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -37,6 +36,7 @@ fun UserSettingsScreen(
     val context = LocalContext.current
 
     val latestNavigateToChat by rememberUpdatedState(navigateToChat)
+    val latestNavigateToAuthSelection by rememberUpdatedState(navigateToAuthSelection)
 
     LaunchedEffect(lifecycleOwner, viewModel) {
         viewModel.uiEvent.flowWithLifecycle(lifecycleOwner.lifecycle).onEach { event ->
@@ -54,7 +54,7 @@ fun UserSettingsScreen(
     LaunchedEffect(lifecycleOwner, viewModel) {
         viewModel.uiEffect.flowWithLifecycle(lifecycleOwner.lifecycle).onEach { effect ->
             when (effect) {
-                is UserSettingsSideEffect.NavigateToAuthSelection -> navigateToAuthSelection()
+                is UserSettingsSideEffect.NavigateToAuthSelection -> latestNavigateToAuthSelection()
                 is UserSettingsSideEffect.ShowToast -> showToast(context, effect.message)
             }
         }.launchIn(this)
@@ -79,7 +79,7 @@ private fun UserSettingsScreen(
             UserSettingsScreenTopBar(
                 onNavigateToChat = { onEvent(UserSettingsUiEvent.OnNavigateToChat) },
             )
-        }
+        },
     ) { innerPadding ->
         UserSettingsScreenContent(
             uiState = uiState,

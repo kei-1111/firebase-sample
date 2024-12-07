@@ -21,7 +21,7 @@ object UseCaseModule {
     fun provideSignUpWithEmailUseCase(
         authRepository: AuthRepository,
         userRepository: UserRepository,
-        @IoDispatcher ioDispatcher: CoroutineDispatcher
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
     ): SignUpWithEmailUseCase = SignUpWithEmailUseCaseImpl(authRepository, userRepository, ioDispatcher)
 
     @Provides

@@ -23,10 +23,10 @@ fun FirebaseSampleNavHost(
         modifier = modifier,
     ) {
         composable<Screen.AuthSelection> {
-             AuthSelectionScreen(
-                 navigateToSignUp = { navController.navigateToSignUp() },
-                 navigateToSignIn = { navController.navigateToSignIn() },
-             )
+            AuthSelectionScreen(
+                navigateToSignUp = { navController.navigateToSignUp() },
+                navigateToSignIn = { navController.navigateToSignIn() },
+            )
         }
 
         composable<Screen.SignUp> {
