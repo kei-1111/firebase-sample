@@ -51,8 +51,7 @@ private fun SignUpHeader(
 ) {
     CenteredContainer(
         modifier = modifier,
-
-        ) {
+    ) {
         DisplayMediumText(
             text = "新規登録",
         )
@@ -92,7 +91,7 @@ private fun SignUpFields(
         SignUpButton(
             onClick = { onEvent(SignUpUiEvent.OnSignUpButtonClick) },
             modifier = Modifier.fillMaxWidth(),
-            enabled = uiState.email.isNotEmpty() && uiState.password.isNotEmpty(),
+            enabled = uiState.email.isNotEmpty() && uiState.password.length >= 6,
         )
         HorizontalDivider(
             modifier = Modifier
