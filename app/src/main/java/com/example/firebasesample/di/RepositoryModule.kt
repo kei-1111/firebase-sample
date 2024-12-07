@@ -36,7 +36,6 @@ object RepositoryModule {
     @Singleton
     fun provideUserRepository(
         firestore: FirebaseFirestore,
-        auth: FirebaseAuth,
         @IoDispatcher ioDispatcher: CoroutineDispatcher,
-    ): UserRepository = UserRepositoryImpl(firestore, auth, ioDispatcher)
+    ): UserRepository = UserRepositoryImpl(firestore, ioDispatcher)
 }
